@@ -19,10 +19,10 @@ def main() -> None:
 
         available_mana = 6
         print(f'Playing {fire_dragon.get_name()} with {available_mana} '
-            'mana available:')
+              'mana available:')
         print(f'Playable: {fire_dragon.is_playable(available_mana)}')
         print('Play result: '
-            f'{fire_dragon.play({"available_mana": available_mana})}')
+              f'{fire_dragon.play({"available_mana": available_mana})}')
         print()
 
         goblin_warrior = CreatureCard(
