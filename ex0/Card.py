@@ -60,6 +60,15 @@ class Card(ABC):
     def is_playable(self, available_mana: int) -> bool:
         return self.get_cost() <= available_mana
 
+    def use_card(self, game_state: dict) -> None:
+        if not self.is_playable(game_state.get('available_mana', 0)):
+            raise ValueError('Not enough mana to play '
+                             f'{self.get_name().capitalize()}.')
+        new_mana = game_state.get('available_mana', 0) - self.get_cost()
+        game_state.update({
+            'available_mana': new_mana
+        })
+
     @abstractmethod
     def play(self, game_state: dict) -> dict[str, str | int] | None:
         pass
