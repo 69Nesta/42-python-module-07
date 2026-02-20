@@ -36,9 +36,9 @@ class CreatureCard(Card):
 
     def remove_health(self, amount: int) -> None:
         if not isinstance(amount, int):
-            raise TypeError('Damage amount must be an integer.')
+            raise TypeError('Health amount must be an integer.')
         elif amount < 0:
-            raise ValueError('Damage amount cannot be negative.')
+            raise ValueError('Health amount cannot be negative.')
         self._health = max(0, self._health - amount)
 
     def remove_attack(self, amount: int) -> None:
