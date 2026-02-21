@@ -1,26 +1,4 @@
-# === DataDeck Ability System ===
-
-# EliteCard capabilities:
-# - Card: ['play', 'get_card_info', 'is_playable']
-# - Combatable: ['attack', 'defend', 'get_combat_stats']
-# - Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']
-#
-# Playing Arcane Warrior (Elite Card):
-#
-# Combat phase:
-# Attack result: {'attacker': 'Arcane Warrior', 'target': 'Enemy',
-# 'damage': 5, 'combat_type': 'melee'}
-# Defense result: {'defender': 'Arcane Warrior', 'damage_taken': 2,
-# 'damage_blocked': 3, 'still_alive': True}
-#
-# Magic phase:
-# Spell cast: {'caster': 'Arcane Warrior', 'spell': 'Fireball',
-# 'targets': ['Enemy1', 'Enemy2'], 'mana_used': 4}
-# Mana channel: {'channeled': 3, 'total_mana': 7}
-#
-# Multiple interface implementation successful!
-
-from ex0.Card import Rarity, Card
+from ex0.Card import Rarity
 from ex2.EliteCard import EliteCard
 
 
@@ -33,31 +11,32 @@ def main() -> None:
         attack_damage=5,
         has_sheild=True,
         combat_type='melee',
-        mana=4
+        mana=8
     )
 
-    # enemys = [
-    #     EliteCard(
-    #         name='Enemy1',
-    #         attack=3,
-    #         health=8,
-    #         has_sheild=True,
-    #         combat_type='ranged',
-    #         mana=2
-    #     ),
-    #     EliteCard(
-    #         name='Enemy2',
-    #         attack=4,
-    #         health=9,
-    #         has_sheild=False,
-    #         combat_type='melee',
-    #         mana=3
-    #     )
-    # ]
+    enemys = [
+        EliteCard(
+            name='Enemy1',
+            cost=5,
+            rarity=Rarity.RARE.value,
+            attack_damage=3,
+            health=8,
+            has_sheild=True,
+            combat_type='ranged',
+            mana=2
+        ),
+        EliteCard(
+            name='Enemy2',
+            cost=4,
+            rarity=Rarity.COMMON.value,
+            attack_damage=4,
+            health=9,
+            has_sheild=False,
+            combat_type='melee',
+            mana=3
+        )
+    ]
 
-    # game_state = {
-    #     'players': [card] + enemys
-    # }
     capabilities = {}
     for base in reversed(EliteCard.__mro__):
         for name, attr in base.__dict__.items():
@@ -71,6 +50,22 @@ def main() -> None:
     print('EliteCard capabilities:')
     for base, methods in capabilities.items():
         print(f'- {base}: {methods}')
+
+    print('\nPlaying Arcane Warrior (Elite Card):\n')
+    print('Combat phase:')
+    enemy = enemys[0]
+    attack_result = card.attack(enemy)
+    print(f'Attack result: {attack_result}')
+    defense_result = enemy.defend(attack_result.get('damage', 0))
+    print(f'Defense result: {defense_result}')
+
+    print('\nMagic phase:')
+    spell_result = card.cast_spell('Fireball', enemys)
+    print(f'Spell cast: {spell_result}')
+    mana_result = card.channel_mana(3)
+    print(f'Mana channel: {mana_result}')
+
+    print('\nMultiple interface implementation successful!')
 
 
 if __name__ == '__main__':

@@ -53,7 +53,7 @@ class EliteCard(Card, Combatable, Magical):
             raise TypeError('Mana value must be an integer.')
         elif mana < 0:
             raise ValueError('Mana value cannot be negative.')
-        self._health = mana
+        self._mana = mana
 
     def _set_has_sheild(self, has_sheild: bool) -> None:
         if not isinstance(has_sheild, bool):
@@ -160,6 +160,7 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def cast_spell(self, spell_name: str, targets: list) -> dict:
+        spell_name = spell_name.lower().strip()
         if spell_name not in self.SPELLS:
             raise ValueError('Unknown spell: ' + spell_name)
 
