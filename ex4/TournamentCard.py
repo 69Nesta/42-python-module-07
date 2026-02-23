@@ -1,5 +1,5 @@
-from ex0.Card import Card, Rarity
-from ex2.Combatable import Combatable
+from ex0 import Card, Rarity
+from ex2 import Combatable
 from .Rankable import Rankable
 
 

@@ -1,6 +1,5 @@
 from enum import Enum
-from ex0.Card import Card
-from ex0.CreatureCard import CreatureCard
+from ex0 import Card, CreatureCard
 
 
 class SpellEffect(Enum):

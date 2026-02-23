@@ -1,14 +1,12 @@
-from ex0.Card import Card
-from ex0.CreatureCard import CreatureCard
-from ex1.SpellCard import SpellCard
-from ex1.ArtifactCard import ArtifactCard
-
+from ex0 import Card, CreatureCard
+from .SpellCard import SpellCard
+from .ArtifactCard import ArtifactCard
 
 from random import shuffle
 
 
 class Deck:
-    def __init__(self):
+    def __init__(self) -> None:
         self.cards: list[Card] = []
 
     def add_card(self, card: Card) -> None:

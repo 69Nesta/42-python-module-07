@@ -1,7 +1,6 @@
-from ex3.CardFactory import CardFactory
-from ex3.GameStrategy import GameStrategy
-from ex0.Card import Card, Rarity
-from ex0.CreatureCard import CreatureCard
+from ex0 import Card, Rarity, CreatureCard
+from .CardFactory import CardFactory
+from .GameStrategy import GameStrategy
 
 
 class GameEngine:

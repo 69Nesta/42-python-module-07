@@ -1,5 +1,5 @@
 from ex0.Card import Rarity
-from ex2.EliteCard import EliteCard
+from .EliteCard import EliteCard
 
 
 def main() -> None:
@@ -37,11 +37,10 @@ def main() -> None:
         )
     ]
 
-    capabilities = {}
+    capabilities: dict = {}
     for base in reversed(EliteCard.__mro__):
         for name, attr in base.__dict__.items():
             if getattr(attr, "__isabstractmethod__", False):
-                print(f"Found abstract method: {name} in {base.__name__}")
                 capabilities.update({
                     base.__name__: capabilities.get(base.__name__, []) + [name]
                 })

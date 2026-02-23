@@ -62,7 +62,7 @@ class CreatureCard(Card):
             raise ValueError('Attack increase amount cannot be negative.')
         self._attack += amount
 
-    def get_card_info(self):
+    def get_card_info(self) -> dict:
         return super().get_card_info() | {
             'type': 'Creature',
             'attack': self.get_attack(),
