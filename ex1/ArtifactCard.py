@@ -41,7 +41,7 @@ class ArtifactCard(Card):
         if self.current_durabiluty < 1:
             return False
         else:
-            self.current_durabiluty - 1
+            self.current_durabiluty -= 1
             return True
 
     def play(self, game_state: dict) -> dict:

@@ -70,7 +70,7 @@ class TournamentCard(Card, Combatable, Rankable):
             'still_alive': self.get_health() > 0
         }
 
-    def get_combat_stats(self) -> dict:
+    def get_tournament_stats(self) -> dict:
         return {
             'attack': self.get_attack(),
             'health': self.get_health(),
