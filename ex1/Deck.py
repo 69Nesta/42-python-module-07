@@ -39,7 +39,7 @@ class Deck:
             'avg_cost': avg_cost
         })
 
-        def incr_cat(name: str):
+        def incr_cat(name: str) -> None:
             deck_stats.update({name: deck_stats.get(name, 0) + 1})
 
         for card in self.cards:

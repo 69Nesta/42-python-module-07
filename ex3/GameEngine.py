@@ -4,7 +4,7 @@ from .GameStrategy import GameStrategy
 
 
 class GameEngine:
-    def __init__(self):
+    def __init__(self) -> None:
         self._factory: CardFactory | None = None
         self._strategy: GameStrategy | None = None
         self._turns_simulated: int = 0
@@ -62,7 +62,11 @@ class GameEngine:
         )
         print(f'Actions: {turn_actions}')
         self._increment_turns()
-        self._total_damage += turn_actions.get('damage_dealt', 0)
+        damages = turn_actions.get('damage_dealt', 0)
+        if isinstance(damages, int):
+            self._total_damage += damages
+
+        return turn_actions
 
     def get_engine_status(self) -> dict:
         return {

@@ -32,8 +32,10 @@ class TournamentCard(Card, Combatable, Rankable):
     def play(self, game_state: dict) -> dict:
         defend_result = self.defend(game_state.get('incoming_damage', 0))
         still_alive = defend_result.get('still_alive', True)
-        if still_alive:
-            attack_result = self.attack(game_state.get('opponent', None))
+
+        opponent = game_state.get('opponent')
+        if still_alive and isinstance(opponent, Combatable):
+            attack_result = self.attack(opponent)
 
         damages = attack_result.get('damage', 0) if still_alive else 0
         return {

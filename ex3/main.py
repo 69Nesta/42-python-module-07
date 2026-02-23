@@ -3,7 +3,7 @@ from .FantasyCardFactory import FantasyCardFactory
 from .AggressiveStrategy import AggressiveStrategy
 
 
-def main():
+def main() -> None:
     print('=== DataDeck Game Engine ===\n')
     engine = GameEngine()
     engine.configure_engine(
