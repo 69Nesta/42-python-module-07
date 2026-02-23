@@ -31,3 +31,7 @@ class CardFactory(ABC):
 
     def get_cards_created(self) -> int:
         return self._cards_created
+
+    def create_custom_card(self, card: Card) -> Card:
+        self.increment_created()
+        return card

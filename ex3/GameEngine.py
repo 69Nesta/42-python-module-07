@@ -42,7 +42,9 @@ class GameEngine:
 
         hand: list[Card] = [card for cards in deck.values() for card in cards]
         battlefield: list[Card] = [
-            CreatureCard('Enemy Goblin', 2, Rarity.COMMON.value, 2, 10),
+            self.get_factory().create_custom_card(
+                CreatureCard('Enemy Goblin', 2, Rarity.COMMON.value, 2, 10)
+            )
         ]
 
         print('Hand: [' +
