@@ -1,13 +1,16 @@
 from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
-from ex1.SpellCard import SpellCard
+from ex1.SpellCard import SpellCard, SpellEffect
 from ex3.GameStrategy import GameStrategy
 
 
 class AggressiveStrategy(GameStrategy):
     def execute_turn(self, hand: list[Card], battlefield: list[Card]) -> dict:
         prioritize_targets = self.prioritize_targets(battlefield)
-        sorted_card_by_cost = hand.sort(key=lambda card: card.get_cost())
+        sorted_card_by_cost = sorted(
+            hand.copy(),
+            key=lambda card: card.get_cost()
+        )
 
         if (not prioritize_targets):
             return {
@@ -19,19 +22,27 @@ class AggressiveStrategy(GameStrategy):
 
         selected_cards: list[Card] = []
         total_damage: int = 0
+
         while len(selected_cards) < 2 and sorted_card_by_cost:
             card = sorted_card_by_cost.pop()
             if isinstance(card, CreatureCard):
                 selected_cards.append(card)
                 total_damage += card.get_attack()
-            elif isinstance(card, SpellCard) and card.effect_type == 'damage':
+            elif (isinstance(card, SpellCard)
+                  and card.effect_type == SpellEffect.DAMAGE.value):
                 selected_cards.append(card)
                 total_damage += card.get_cost()
 
-        targets_attacked = [target.get_name() for target in prioritize_targets]
+        targets_attacked = [
+            target.get_name().title()
+            for target in prioritize_targets
+        ]
 
         return {
-            'cards_played': [card.get_name() for card in selected_cards],
+            'cards_played': [
+                card.get_name().title()
+                for card in selected_cards
+            ],
             'mana_used': sum(card.get_cost() for card in selected_cards),
             'targets_attacked': targets_attacked,
             'damage_dealt': total_damage
